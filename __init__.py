@@ -35,7 +35,7 @@ def login():
         return redirect(url_for('index'))
 
 # Dashboard
-@app.route('/dashboard', methods=['GET', 'POST'])
+@app.route('/index', methods=['GET', 'POST'])
 def dashboard():
     if 'loggedin' not in session or not session['loggedin']:
         return redirect(url_for('index'))
@@ -48,7 +48,7 @@ def dashboard():
     datos = obtener_datos(rango)
     suma = calcular_suma(rango)
 
-    return render_template('dashboard.html', datos=datos, suma=suma)
+    return render_template('index.html', datos=datos, suma=suma)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=50580)
