@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session,jsonify
-from Funciones import validar_usuario
+from Funciones import validar_usuario,obtener_datos,calcular_suma
 app = Flask(__name__)
 #Inicio Sesion
 @app.route('/')
@@ -26,7 +26,20 @@ def login():
         return redirect(url_for('index'))
     except Exception as e:
         return redirect(url_for('index'))
+
+
+@app.route("/", methods=['GET', 'POST'])
+def mostrar_datos():
+    if request.method == 'POST':
+        rango = int(request.form['rango'])
+    else:
+        rango = 10
     
+    datos = obtener_datos(rango)
+    suma = calcular_suma(rango)
+
+    return render_template('Tabla2.html', datos=datos, suma=suma)
+
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=50580)

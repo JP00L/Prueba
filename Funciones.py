@@ -18,5 +18,39 @@ def validar_usuario(username, password):
     except Exception as e:
         return f"Error en validar_usuario: {str(e)}"
     
+def obtener_datos(rango):
+    try:
+        conexion = mysql.connector.connect(
+            host="mysql-easyocr.alwaysdata.net",
+            user="easyocr",
+            password="admin2023",
+            database="easyocr_2"
+        )
+        cursor = conexion.cursor()
+        cursor.execute(f"SELECT * FROM Bogota LIMIT {rango}")
+        datos = cursor.fetchall()
+        cursor.close()
+        conexion.close()
+        return datos
+    except Exception as e:
+        return str(400)
+
+def calcular_suma(rango):
+    try:
+        conexion = mysql.connector.connect(
+            host="mysql-easyocr.alwaysdata.net",
+            user="easyocr",
+            password="admin2023",
+            database="easyocr_2"
+        )
+        cursor = conexion.cursor()
+        cursor.execute(f"SELECT SUM(Valor_Ingresado) FROM (SELECT * FROM Bogota LIMIT {rango}) AS subconsulta")
+        suma = cursor.fetchone()[0]
+        suma_formateada = "${:,.0f}".format(suma)
+        cursor.close()
+        conexion.close()
+        return suma_formateada
+    except Exception as e:
+        return str("Error 400")
 
     
