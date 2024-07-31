@@ -34,9 +34,9 @@ def login():
         print(f"An error occurred during login: {e}")  # Debug print
         return redirect(url_for('index'))
 
-# Dashboard
+# Index
 @app.route('/index', methods=['GET', 'POST'])
-def dashboard():
+def Index():
     if 'loggedin' not in session or not session['loggedin']:
         return redirect(url_for('index'))
 
@@ -65,7 +65,7 @@ def Productividad():
 def mostrar_pdf(documento):
     Valo = Extraccion_Data(documento)
     Valo = Valo[0]
-    return render_template('tabla3.html', valores=Valo)
+    return render_template('dashboard.html', valores=Valo)
 
 @app.route("/prueba")
 def prueba():
@@ -88,7 +88,12 @@ def Reset():
     Reset_Data()
     return render_template('index.html')
 
-
+#Cerrar Sesion
+@app.route('/logout')
+def logout():
+    session.pop('loggedin', None)
+    session.pop('username', None)
+    return redirect(url_for('index'))
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=50580)

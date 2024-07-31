@@ -1,1 +1,651 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RECIBO DE PRODUCTIVIDAD</title>
+    <style>
+      body {
+        font-size: 13px;
+      }
+
+      .Tabla {
+        width: 85%;
+        margin-left: auto;
+        margin-right: auto;
+        border: 1px solid #000000dd;
+        text-align: center;
+      }
+
+      .Tabla_Borde {
+        border: 1px solid #000000dd;
+        border-radius: 20px;
+        float: right;
+        width: 50%;
+      }
+
+      .Bd {
+        border: 1px solid #000000dd;
+      }
+
+      .Bd_W {
+        border: 1px solid #000000dd;
+        background-color: #ffffff;
+      }
+
+      .Bd_F {
+        border: 1px solid #000000dd;
+        background-color: #d5d5d5;
+      }
+
+      .Tb_C {
+        /* margin: 0 auto; */
+        width: 100%;
+      }
+
+      td {
+        text-align: center;
+        margin: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <h1></h1>
+    <table class="Tabla" class="Bd">
+      <tr>
+        <td>
+          <table class="Tb_C">
+            <tr>
+              <td class="Bd" style="width: 50%">Logo gama</td>
+              <td class="Bd" style="width: 50%">
+                <table class="Tabla_Borde">
+                  <tr>
+                    <td>RECIBO DE PRODUCTIVIDAD</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <table class="Tb_C">
+                        <td>No.</td>
+                        <td style="color: red">
+                          {{valores[1]}} / {{valores[0]}}
+                        </td>
+                        <td></td>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td style="height: 50px">
+          <table class="Tb_C">
+            <tr>
+              <td class="Bd" style="width: 22%; background-color: #d5d5d5">
+                FECHA DE PRODUCCIÓN:
+              </td>
+              <td class="Bd_F">
+                <table class="Tb_C">
+                  <tr>
+                    <td>Dia</td>
+                  </tr>
+                  <tr>
+                    <td class="Bd_W" style="height: 15px">{{valores[2]}}</td>
+                  </tr>
+                </table>
+              </td>
+              <td class="Bd_F">
+                <table class="Tb_C">
+                  <tr>
+                    <td>Mes</td>
+                  </tr>
+                  <tr>
+                    <td class="Bd_W" style="height: 15px">{{valores[3]}}</td>
+                  </tr>
+                </table>
+              </td>
+              <td class="Bd_F">
+                <table class="Tb_C">
+                  <tr>
+                    <td>Año</td>
+                  </tr>
+                  <tr>
+                    <td class="Bd_W" style="height: 15px">{{valores[4]}}</td>
+                  </tr>
+                </table>
+              </td>
+              <td class="Bd" style="width: 21%; background-color: #d5d5d5">
+                VALOR INSPECCIONES:
+              </td>
+              <td class="Bd" style="width: 30%">{{valores[8]}}</td>
+            </tr>
+            <tr>
+              <td class="Bd" style="width: 22%; background-color: #d5d5d5">
+                FECHA DE RECIBIDO:
+              </td>
+              <td class="Bd_F">
+                <table class="Tb_C">
+                  <tr>
+                    <td>Dia</td>
+                  </tr>
+                  <tr>
+                    <td class="Bd_W" style="height: 15px">{{valores[5]}}</td>
+                  </tr>
+                </table>
+              </td>
+              <td class="Bd_F">
+                <table class="Tb_C">
+                  <tr>
+                    <td>Mes</td>
+                  </tr>
+                  <tr>
+                    <td class="Bd_W" style="height: 15px">{{valores[6]}}</td>
+                  </tr>
+                </table>
+              </td>
+              <td class="Bd_F">
+                <table class="Tb_C">
+                  <tr>
+                    <td>Año</td>
+                  </tr>
+                  <tr>
+                    <td class="Bd_W" style="height: 15px">{{valores[7]}}</td>
+                  </tr>
+                </table>
+              </td>
+              <td class="Bd" style="width: 21%; background-color: #d5d5d5">
+                VALOR S.P INSPECTOR:
+              </td>
+              <td class="Bd" style="width: 30%">{{valores[9]}}</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td style="height: 30px">
+          <table class="Tb_C" style="height: 100%">
+            <tr>
+              <td class="Bd_F" style="width: 21.8%">INSPECTOR:</td>
+              <td class="Bd" style="width: 27.4%">{{valores[11]}}</td>
+              <td class="Bd_F" style="width: 20.9%">VALOR A LIQUIDAR:</td>
+              <td class="Bd" style="width: 29.9%">{{valores[10]}}</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td style="height: 25px">
+          <table class="Tb_C" style="height: 100%">
+            <tr>
+              <td class="Bd_F" style="width: 21.8%">INSPECCIONES REALIZADAS</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <table class="Tb_C">
+            <tr>
+              <td class="Bd_F" style="width: 12.5%">PREVIAS RESID.</td>
+              <td class="Bd_F" style="width: 12.5%">REFORMAS RESID.</td>
+              <td class="Bd_F" style="width: 12.5%">PERIÓDICAS RESID.</td>
+              <td class="Bd_F" style="width: 12.5%">PREVIAS COMERCIALES</td>
+              <td class="Bd_F" style="width: 12.5%">PERIODICAS COMERCIALES</td>
+              <td class="Bd_F" style="width: 12.5%">RED MATRIZ</td>
+              <td class="Bd_F" style="width: 12.5%">MONÓXIDOS</td>
+              <td class="Bd_F" style="width: 12.5%">2da VISITA</td>
+            </tr>
+            <tr>
+              <td class="Bd_F" style="width: 12.5%">
+                <table class="Tb_C">
+                  <td>RUTA OFICINA</td>
+                  <td>REFERIDA .</td>
+                  <tr>
+                    <td class="Bd_W" style="height: 20px">{{valores[12]}}</td>
+                    <td class="Bd_W" style="height: 20px">{{valores[13]}}</td>
+                  </tr>
+                </table>
+              </td>
+              <td class="Bd_F" style="width: 12.5%">
+                <table class="Tb_C">
+                  <td>RUTA OFICINA</td>
+                  <td>REFERIDA .</td>
+                  <tr>
+                    <td class="Bd_W" style="height: 20px">{{valores[14]}}</td>
+                    <td class="Bd_W" style="height: 20px">{{valores[15]}}</td>
+                  </tr>
+                </table>
+              </td>
+              <td class="Bd_F" style="width: 12.5%">
+                <table class="Tb_C">
+                  <td>RUTA OFICINA</td>
+                  <td>REFERIDA .</td>
+                  <tr>
+                    <td class="Bd_W" style="height: 20px">{{valores[16]}}</td>
+                    <td class="Bd_W" style="height: 20px">{{valores[17]}}</td>
+                  </tr>
+                </table>
+              </td>
+              <td class="Bd_F" style="width: 12.5%">
+                <table class="Tb_C">
+                  <td>RUTA OFICINA</td>
+                  <td>REFERIDA .</td>
+                  <tr>
+                    <td class="Bd_W" style="height: 20px">{{valores[18]}}</td>
+                    <td class="Bd_W" style="height: 20px">{{valores[19]}}</td>
+                  </tr>
+                </table>
+              </td>
+              <td class="Bd_F" style="width: 12.5%">
+                <table class="Tb_C">
+                  <td>RUTA OFICINA</td>
+                  <td>REFERIDA .</td>
+                  <tr>
+                    <td class="Bd_W" style="height: 20px">{{valores[20]}}</td>
+                    <td class="Bd_W" style="height: 20px">{{valores[21]}}</td>
+                  </tr>
+                </table>
+              </td>
+              <td class="Bd_F" style="width: 12.5%">
+                <table class="Tb_C">
+                  <td>RUTA OFICINA</td>
+                  <td>REFERIDA .</td>
+                  <tr>
+                    <td class="Bd_W" style="height: 20px">{{valores[22]}}</td>
+                    <td class="Bd_W" style="height: 20px">{{valores[23]}}</td>
+                  </tr>
+                </table>
+              </td>
+              <td class="Bd_W" style="width: 12.5%">{{ valores[24] }}</td>
+              <td class="Bd_W" style="width: 12.5%">{{ valores[25] }}</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <table class="Tb_C">
+            <th class="Bd_F" style="width: 5.8%">3ra VISITA</th>
+            <th class="Bd_F" style="width: 7.2%">CAMBIOS</th>
+            <th class="Bd_F" style="width: 55%">REVISIONES FACTURADAS</th>
+            <th class="Bd_F" style="width: 32%">OBSERVACIONES DE LA FACTURA</th>
+            <tr>
+              <td class="Bd_W">{{valores[26]}}</td>
+              <td class="Bd_W">{{valores[27]}}</td>
+              <td class="Bd_F">
+                <table class="Tb_C">
+                  <th style="height: 20px">PREV./REFORM.</th>
+                  <th style="height: 20px">PERIODICAS</th>
+                  <th style="height: 20px">COMERCIALES</th>
+                  <th style="height: 20px">RED MATRIZ</th>
+                  <tr>
+                    <td class="Bd_W" style="height: 20px">{{valores[28]}}</td>
+                    <td class="Bd_W" style="height: 20px">{{valores[29]}}</td>
+                    <td class="Bd_W" style="height: 20px">{{valores[30]}}</td>
+                    <td class="Bd_W" style="height: 20px">{{valores[31]}}</td>
+                  </tr>
+                </table>
+              </td>
+              <td class="Bd_W">{{valores[32]}}</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <table class="Tb_C">
+            <tr>
+              <td class="Bd_F" style="height: 20px; width: 12.5%">
+                CONSIGNACION COMPROBANTE #
+              </td>
+              <td class="Bd_W" style="height: 20px; width: 12.5%">
+                {{valores[33]}}
+              </td>
+              <td class="Bd_F" style="height: 20px; width: 12.5%">
+                CONSIGNACION COMPROBANTE #
+              </td>
+              <td class="Bd_W" style="height: 20px; width: 12.5%">
+                {{valores[39]}}
+              </td>
+              <td class="Bd_F" style="height: 20px; width: 12.5%">
+                CONSIGNACION COMPROBANTE #
+              </td>
+              <td class="Bd_W" style="height: 20px; width: 12.5%">
+                {{valores[45]}}
+              </td>
+              <td class="Bd_F" style="height: 20px; width: 12.5%">
+                CONSIGNACION COMPROBANTE #
+              </td>
+              <td class="Bd_W" style="height: 20px; width: 12.5%">
+                {{valores[51]}}
+              </td>
+            </tr>
+            <tr>
+              <td class="Bd_F" style="height: 20px; width: 12.5%">
+                FECHA CONSIGNACION
+              </td>
+              <td class="Bd_W" style="height: 20px; width: 12.5%">
+                {{valores[34]}}
+              </td>
+              <td class="Bd_F" style="height: 20px; width: 12.5%">
+                FECHA CONSIGNACION
+              </td>
+              <td class="Bd_W" style="height: 20px; width: 12.5%">
+                {{valores[40]}}
+              </td>
+              <td class="Bd_F" style="height: 20px; width: 12.5%">
+                FECHA CONSIGNACION
+              </td>
+              <td class="Bd_W" style="height: 20px; width: 12.5%">
+                {{valores[46]}}
+              </td>
+              <td class="Bd_F" style="height: 20px; width: 12.5%">
+                FECHA CONSIGNACION
+              </td>
+              <td class="Bd_W" style="height: 20px; width: 12.5%">
+                {{valores[52]}}
+              </td>
+            </tr>
+            <tr>
+              <td class="Bd_F" style="height: 20px; width: 12.5%">VALOR</td>
+              <td class="Bd_W" style="height: 20px; width: 12.5%">
+                {{valores[35]}}
+              </td>
+              <td class="Bd_F" style="height: 20px; width: 12.5%">VALOR</td>
+              <td class="Bd_W" style="height: 20px; width: 12.5%">
+                {{valores[41]}}
+              </td>
+              <td class="Bd_F" style="height: 20px; width: 12.5%">VALOR</td>
+              <td class="Bd_W" style="height: 20px; width: 12.5%">
+                {{valores[47]}}
+              </td>
+              <td class="Bd_F" style="height: 20px; width: 12.5%">VALOR</td>
+              <td class="Bd_W" style="height: 20px; width: 12.5%">
+                {{valores[53]}}
+              </td>
+            </tr>
+            <tr>
+              <td class="Bd_F" style="height: 20px; width: 12.5%">
+                CONSIGNACION COMPROBANTE #
+              </td>
+              <td class="Bd_W" style="height: 20px; width: 12.5%">
+                {{valores[36]}}
+              </td>
+              <td class="Bd_F" style="height: 20px; width: 12.5%">
+                CONSIGNACION COMPROBANTE #
+              </td>
+              <td class="Bd_W" style="height: 20px; width: 12.5%">
+                {{valores[42]}}
+              </td>
+              <td class="Bd_F" style="height: 20px; width: 12.5%">
+                CONSIGNACION COMPROBANTE #
+              </td>
+              <td class="Bd_W" style="height: 20px; width: 12.5%">
+                {{valores[48]}}
+              </td>
+              <td class="Bd_F" style="height: 20px; width: 12.5%">
+                CONSIGNACION COMPROBANTE #
+              </td>
+              <td class="Bd_W" style="height: 20px; width: 12.5%">
+                {{valores[54]}}
+              </td>
+            </tr>
+            <tr>
+              <td class="Bd_F" style="height: 20px; width: 12.5%">
+                FECHA CONSIGNACION
+              </td>
+              <td class="Bd_W" style="height: 20px; width: 12.5%">
+                {{valores[37]}}
+              </td>
+              <td class="Bd_F" style="height: 20px; width: 12.5%">
+                FECHA CONSIGNACION
+              </td>
+              <td class="Bd_W" style="height: 20px; width: 12.5%">
+                {{valores[43]}}
+              </td>
+              <td class="Bd_F" style="height: 20px; width: 12.5%">
+                FECHA CONSIGNACION
+              </td>
+              <td class="Bd_W" style="height: 20px; width: 12.5%">
+                {{valores[49]}}
+              </td>
+              <td class="Bd_F" style="height: 20px; width: 12.5%">
+                FECHA CONSIGNACION
+              </td>
+              <td class="Bd_W" style="height: 20px; width: 12.5%">
+                {{valores[55]}}
+              </td>
+            </tr>
+            <tr>
+              <td class="Bd_F" style="height: 20px; width: 12.5%">VALOR</td>
+              <td class="Bd_W" style="height: 20px; width: 12.5%">
+                {{valores[38]}}
+              </td>
+              <td class="Bd_F" style="height: 20px; width: 12.5%">VALOR</td>
+              <td class="Bd_W" style="height: 20px; width: 12.5%">
+                {{valores[44]}}
+              </td>
+              <td class="Bd_F" style="height: 20px; width: 12.5%">VALOR</td>
+              <td class="Bd_W" style="height: 20px; width: 12.5%">
+                {{valores[50]}}
+              </td>
+              <td class="Bd_F" style="height: 20px; width: 12.5%">VALOR</td>
+              <td class="Bd_W" style="height: 20px; width: 12.5%">
+                {{valores[56]}}
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <table class="Tb_C">
+            <td class="Bd_F" style="width: 39%; height: 35px">
+              S.P. INSPECTOR
+            </td>
+            <td class="Bd_F" style="width: 33%">
+              PORCENTAJE AL INSPECTOR (referidas)
+            </td>
+            <td class="Bd_F" style="width: 7.5%">{{valores[57]}}</td>
+            <td class="Bd_W" style="width: 7.5%">{{valores[58]}}</td>
+            <td class="Bd_F" style="width: 7.5%">{{valores[59]}}</td>
+            <td class="Bd_W" style="width: 7.5%">{{valores[60]}}</td>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>
+        <table class="Tb_C">
+          <th class="Bd_F" style="width: 15.9%">PREVIAS RESID.</th>
+          <th class="Bd_F" style="width: 15.9%">REFORMAS RESID.</th>
+          <th class="Bd_F" style="width: 15.9%">PERIÓDICAS RESID.</th>
+          <th class="Bd_F" style="width: 15.9%">PREVIAS COMERCIALES</th>
+          <th class="Bd_F" style="width: 15.9%">PERIODICAS COMERCIALES</th>
+          <th class="Bd_F" style="width: 20.5%">VALOR S.P. INSPECTOR</th>
+          <tr>
+            <td>
+              <table class="Tb_C">
+                <tr>
+                  <th class="Bd_F">RUTA OFI</th>
+                  <th class="Bd_F">REFERIDA</th>
+                </tr>
+                <tr>
+                  <td class="Bd">{{valores[61]}}</td>
+                  <td class="Bd_F">
+                    <table class="Tb_C">
+                      <tr>
+                        <th style="font-size: 10px">CON SERV.</th>
+                        <th style="font-size: 10px">SIN SERV.</th>
+                      </tr>
+                      <tr>
+                        <td class="Bd_W">{{valores[62]}}</td>
+                        <td class="Bd_W">{{valores[63]}}</td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+            <td>
+              <table>
+                <th>RUTA OFI</th>
+                <th>REFERIDA</th>
+                <tr>
+                  <td class="Cl_Tb_Tr">{{valores[64]}}</td>
+                  <td class="Cl_Tb_Tr">
+                    <table>
+                      <th style="font-size: 10px">CON SERV.</th>
+                      <th style="font-size: 10px">SIN SERV.</th>
+                      <tr>
+                        <td>{{valores[65]}}</td>
+                        <td>{{valores[66]}}</td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+            <td>
+              <table>
+                <th style="height: 40px">RUTA OFI</th>
+                <th>REFERIDA</th>
+                <tr>
+                  <td class="Cl_Tb_Tr">{{valores[67]}}</td>
+                  <td class="Cl_Tb_Tr">{{valores[68]}}</td>
+                </tr>
+              </table>
+            </td>
+            <td>
+              <table>
+                <th>RUTA OFI</th>
+                <th>REFERIDA</th>
+                <tr>
+                  <td class="Cl_Tb_Tr">{{valores[69]}}</td>
+                  <td class="Cl_Tb_Tr">
+                    <table>
+                      <th style="font-size: 10px">CON SERV.</th>
+                      <th style="font-size: 10px">SIN SERV.</th>
+                      <tr>
+                        <td>{{valores[70]}}</td>
+                        <td>{{valores[71]}}</td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+            <td>
+              <table>
+                <th style="height: 40px">RUTA OFI</th>
+                <th>REFERIDA</th>
+                <tr>
+                  <td class="Cl_Tb_Tr">{{valores[72]}}</td>
+                  <td class="Cl_Tb_Tr">{{valores[73]}}</td>
+                </tr>
+              </table>
+            </td>
+            <td class="Cl_Tb_Tr">{{valores[74]}}</td>
+          </tr>
+          <tr>
+            <td class="Th_Val">{{valores[75]}}</td>
+            <td class="Th_Val">{{valores[76]}}</td>
+            <td class="Th_Val">{{valores[77]}}</td>
+            <td class="Th_Val">{{valores[78]}}</td>
+            <td class="Th_Val">{{valores[79]}}</td>
+          </tr>
+        </table>
+      </td>
+      </tr>
+      <tr>
+        <table>
+          <th style="width: 15.8%">RED MATRIZ</th>
+          <th style="width: 08%">MONÓXIDOS</th>
+          <th style="width: 08%">2da VISITA</th>
+          <th style="width: 08%">3ra VISTA</th>
+          <th style="width: 08%">CAMBIOS</th>
+          <th style="width: 31.7%">REVISIONES FACTURADAS</th>
+          <th style="width: 20.5%">Observaciones Admon</th>
+          <tr>
+            <td>
+              <table>
+                <th style="font-size: 16px; height: 40px">RUTA OFI</th>
+                <th style="font-size: 16px">REFERIDA</th>
+                <tr>
+                  <td class="Th_Val">{{valores[80]}}</td>
+                  <td class="Th_Val">{{valores[81]}}</td>
+                </tr>
+              </table>
+            </td>
+            <td class="Th_Val">{{valores[82]}}</td>
+            <td class="Th_Val">{{valores[83]}}</td>
+            <td class="Th_Val">{{valores[84]}}</td>
+            <td class="Th_Val">{{valores[85]}}</td>
+            <td>
+              <table style="border: 0px">
+                <th style="font-size: 15px; width: 30.1%; height: 40px">
+                  PREV./REFORM.
+                </th>
+                <th style="font-size: 15px; width: 24.6%">PERIODICAS</th>
+                <th style="font-size: 15px; width: 24.8%">COMERCIAL</th>
+                <th style="font-size: 15px; width: 20.5%">RED MATRIZ</th>
+                <tr>
+                  <td class="Th_Val">{{valores[86]}}</td>
+                  <td class="Th_Val">{{valores[87]}}</td>
+                  <td class="Th_Val">{{valores[88]}}</td>
+                  <td class="Th_Val">{{valores[89]}}</td>
+                </tr>
+              </table>
+            </td>
+            <td>
+              <table>
+                <tr>
+                  <td class="Th_Val">{{valores[99]}}</td>
+                </tr>
+                <tr>
+                  <td class="Th_Val">{{valores[100]}}</td>
+                </tr>
+                <tr>
+                  <td class="Th_Val">{{valores[101]}}</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td class="Th_Val">{{valores[90]}}</td>
+            <td class="Th_Val">{{valores[91]}}</td>
+            <td class="Th_Val">{{valores[92]}}</td>
+            <td class="Th_Val">{{valores[93]}}</td>
+            <td class="Th_Val">{{valores[94]}}</td>
+            <td class="Th_Val">
+              <table>
+                <td style="width: 30.1%; border-right: 1px solid black">
+                  {{valores[95]}}
+                </td>
+                <td style="width: 24.6%; border-right: 1px solid black">
+                  {{valores[96]}}
+                </td>
+              </table>
+            </td>
+            <td class="Th_Val">
+              <table>
+                <td class="Th_Val">{{valores[102]}}</td>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </tr>
+      <tr>
+        <table>
+          <th style="width: 15.8%; height: 35px">ELABORO</th>
+          <td style="width: 24%">{{valores[97]}}</td>
+          <th style="width: 16%">REVISO</th>
+          <td style="width: 23.6%">{{valores[98]}}</td>
+          <td class="Th_Val" style="width: 20.6%">{{valores[103]}}</td>
+        </table>
+      </tr>
+    </table>
+  </body>
+</html>
 

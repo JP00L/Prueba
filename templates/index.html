@@ -3,22 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Datos</title>
-    <link rel="stylesheet" type="text/css" href="static/Principal.css">
+    <link rel="stylesheet" type="text/css" href="static/Index.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-    <div>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-    </div>    
-    <div>
+    <header>
         <h1>Datos de Bogotá</h1>
-        <div>
-            <form action="/" method="post">
+    </header>
+
+    <main>
+        <section class="form-section">
+            <form action="/index" method="post">
                 <label for="rango">Selecciona un rango:</label>
                 <select name="rango" id="rango">
                     <option value="10">10</option>
@@ -28,47 +23,51 @@
                 </select>
                 <input type="submit" value="Actualizar">
             </form>
-        </div>
-        <div>
             <p>La suma de los valores ingresados es: {{ suma }}</p>
-        </div>  
-    </div>
-    <div class="table-container">
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Valor Neto</th>
-                    <th>Valor Inspector</th>
-                    <th>Valor Ingresado</th>
-                    <th>Link</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for dato in datos %}
-                <tr>
-                    <td>{{ dato[0] }}</td>
-                    <td>{{ dato[1] }}</td>
-                    <td>{{ dato[2] }}</td>
-                    <td>{{ dato[3] }}</td>
-                    <td>{{ dato[4] }}</td>
-                    <td><a href="/Docs/{{ dato[5] }}" target="_blank">Enlace</a></td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+        </section>
 
-    <div>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-    </div>
-    
+        <section class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Valor Neto</th>
+                        <th>Valor Inspector</th>
+                        <th>Valor Ingresado</th>
+                        <th>Link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for dato in datos %}
+                    <tr>
+                        <td>{{ dato[0] }}</td>
+                        <td>{{ dato[1] }}</td>
+                        <td class="currency">{{ dato[2] }}</td>
+                        <td class="currency">{{ dato[3] }}</td>
+                        <td class="currency">{{ dato[4] }}</td>
+                        <td><a href="/Docs/{{ dato[5] }}" target="_blank">Enlace</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Datos de Bogotá. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const currencyElements = document.querySelectorAll('.currency');
+            currencyElements.forEach(function(element) {
+                const value = parseFloat(element.textContent);
+                if (!isNaN(value)) {
+                    element.textContent = '$' + value.toLocaleString('es-CO');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
