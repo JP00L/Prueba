@@ -16,10 +16,10 @@
             <form action="/index" method="post">
                 <label for="rango">Selecciona un rango:</label>
                 <select name="rango" id="rango">
-                    <option value="10">10</option>
-                    <option value="20">20</option>
-                    <option value="30">30</option>
-                    <option value="50">50</option>
+                    <option value="10" {% if rango == 10 %}selected{% endif %}>10</option>
+                    <option value="20" {% if rango == 20 %}selected{% endif %}>20</option>
+                    <option value="30" {% if rango == 30 %}selected{% endif %}>30</option>
+                    <option value="50" {% if rango == 50 %}selected{% endif %}>50</option>
                 </select>
                 <input type="submit" value="Actualizar">
             </form>

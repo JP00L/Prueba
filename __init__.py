@@ -8,7 +8,7 @@ app.secret_key = 'your_secret_key'  # Set a secret key for session management
 @app.route('/')
 def index():
     if 'loggedin' in session and session['loggedin']:
-        return redirect(url_for('dashboard'))
+        return redirect(url_for('Tabla'))
     return render_template('login.html')
 
 @app.route('/login', methods=['POST'])
@@ -17,26 +17,20 @@ def login():
         if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
             username = request.form['username']
             password = request.form['password']
-            
-            print(f"Login attempt for user: {username}")  # Debug print
-
             if validar_usuario(username, password):
                 session['loggedin'] = True
                 session['username'] = username
-                print("Login successful")  # Debug print
-                return redirect(url_for('dashboard'))
+                return redirect(url_for('Tabla'))
             else:
-                print("Invalid username or password")  # Debug print
                 return render_template('login.html', error='Usuario o contraseña incorrectos')
 
         return redirect(url_for('index'))
     except Exception as e:
-        print(f"An error occurred during login: {e}")  # Debug print
         return redirect(url_for('index'))
 
-# Index
+# index
 @app.route('/index', methods=['GET', 'POST'])
-def Index():
+def Tabla():
     if 'loggedin' not in session or not session['loggedin']:
         return redirect(url_for('index'))
 
