@@ -8,13 +8,17 @@ def validar_usuario(username, password):
             with conexion.cursor() as cursor:
                 cursor.execute(consulta, (username,))
                 usuarios = cursor.fetchall()
-
-        for usuario in usuarios:
+        if usuarios[0][1].strip() == username.strip():
             hashed_password = hashlib.sha256(password.encode()).hexdigest()
-            if hashed_password == usuario[2]:
-                return True
-
-        return False
+            if hashed_password == usuarios[0][2]:
+                if usuarios[0][3] == "False":
+                    return f"Usuario Deshabilitado" 
+                else:
+                    return True
+            else:
+                return f"Contraseña Errada"
+        else:
+            return "Usuario Invalido"
     except Exception as e:
         return f"Error en validar_usuario: {str(e)}"
     
