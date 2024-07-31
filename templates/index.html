@@ -2,48 +2,73 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Datos de Bogotá</title>
+    <title>Datos</title>
+    <link rel="stylesheet" type="text/css" href="static/Principal.css">
 </head>
 <body>
-    <h1>Datos de Bogotá</h1>
-    
-    <form action="/" method="post">
-        <label for="rango">Selecciona un rango:</label>
-        <select name="rango" id="rango">
-            <option value="10">10</option>
-            <option value="20">20</option>
-            <option value="30">30</option>
-            <option value="50">50</option>
-        </select>
-        <input type="submit" value="Actualizar">
-    </form>
-    <p>La suma de los valores ingresados es: {{ suma }}</p>
+    <div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+    </div>    
+    <div>
+        <h1>Datos de Bogotá</h1>
+        <div>
+            <form action="/" method="post">
+                <label for="rango">Selecciona un rango:</label>
+                <select name="rango" id="rango">
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="30">30</option>
+                    <option value="50">50</option>
+                </select>
+                <input type="submit" value="Actualizar">
+            </form>
+        </div>
+        <div>
+            <p>La suma de los valores ingresados es: {{ suma }}</p>
+        </div>  
+    </div>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Valor Neto</th>
+                    <th>Valor Inspector</th>
+                    <th>Valor Ingresado</th>
+                    <th>Link</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for dato in datos %}
+                <tr>
+                    <td>{{ dato[0] }}</td>
+                    <td>{{ dato[1] }}</td>
+                    <td>{{ dato[2] }}</td>
+                    <td>{{ dato[3] }}</td>
+                    <td>{{ dato[4] }}</td>
+                    <td><a href="/Docs/{{ dato[5] }}" target="_blank">Enlace</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Valor Neto</th>
-                <th>Valor Inspector</th>
-                <th>Valor Ingresado</th>
-                <th>Link</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for dato in datos %}
-            <tr>
-                <td>{{ dato[0] }}</td>
-                <td>{{ dato[1] }}</td>
-                <td>{{ dato[2] }}</td>
-                <td>{{ dato[3] }}</td>
-                <td>{{ dato[4] }}</td>
-                <td><a href="/Docs/{{ dato[5] }}" target="_blank">Enlace</a></td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+    </div>
     
 </body>
 </html>
