@@ -20,7 +20,7 @@ def validar_usuario(username, password):
         else:
             return "Usuario Invalido"
     except Exception as e:
-        return f"Error en validar_usuario: {str(e)}"
+        return f"Error en validar_usuario"
     
 def obtener_datos(rango):
     try:
