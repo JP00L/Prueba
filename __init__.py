@@ -32,12 +32,19 @@ def login():
         return redirect(url_for('index'))
 
 # Verificar autenticación para todas las rutas excepto login, logout y archivos estáticos
-@app.before_request
-def require_login():
-    if request.endpoint and not request.endpoint.startswith('static'):
-        allowed_routes = ['index', 'login', 'logout']
-        if request.endpoint not in allowed_routes and ('loggedin' not in session or not session['loggedin']):
-            return redirect(url_for('index'))
+# @app.before_request
+# def require_login():
+#     if request.endpoint and not request.endpoint.startswith('static'):
+#         allowed_routes = ['index', 'login', 'logout', 'insertar', 'Productividad']
+
+#         if request.endpoint == "Insertar":
+#             return f"{InsertarRegistro()}"
+#         if request.endpoint == "Productividad":
+#             return f"{InsertarRegistro()}"
+
+#         if request.endpoint not in allowed_routes and ('loggedin' not in session or not session['loggedin']):
+            # return redirect(url_for('index'))
+
 
 # index
 @app.route('/index', methods=['GET', 'POST'])
@@ -60,6 +67,7 @@ def Tabla():
 def Insertar():
     if request.method == 'POST':
         return f"{InsertarRegistro()}"
+
 
 @app.route('/Productividad', methods=['POST'])
 def Productividad():
@@ -89,7 +97,7 @@ def prueba2():
     print(Valo)
     return render_template('tabla.html', valores=Valo)
 
-# # Reset SQL
+# Reset SQL
 # @app.route("/JhanReset")
 # def Reset():
 #     Reset_Data()
