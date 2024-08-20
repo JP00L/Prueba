@@ -1,46 +1,90 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Datos</title>
-    <link rel="stylesheet" type="text/css" href="static/Index.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
+    <link rel="stylesheet" type="text/css" href="static/Index.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
     <header>
-        <div class="header-content">
-            <h1 class="Name_Empresa">Chargue Solutions</h1>
-            <a href="/logout" class="logout-button">Logout</a>
-        </div>
+      <div class="header-content">
+        <h1 class="Name_Empresa" id="toggle-debug">Chargue Solutions</h1>
+        <a href="/logout" class="logout-button">Logout</a>
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+          crossorigin="anonymous"
+        />
+      </div>
     </header>
 
     <main>
-        <div id="sidebar" class="sidebar active">
-            <button id="toggle-button" class="toggle-button">☰</button>
-            <nav>
-                <ul>
-                    <li><a href="#item1">Cargue Vanti</a></li>
-                    <li><a href="#item2">Cargue Surgas</a></li>
-                </ul>
-            </nav>
-        </div>
+      <div id="sidebar" class="sidebar active">
+        <button id="toggle-button" class="toggle-button">☰</button>
+        <nav>
+          <ul>
+            <li>
+              <a href="#item1" id="cargue-vanti">Cargue Vanti</a>
+              <ul class="sublist">
+                <li><a href="/Maquinas_De_Procesamiento">>Maquinas De Procesamiento</a></li>
+                <li><a href="/Dasboard_Vanti">>Dasboard Vanti</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="#item2" id="cargue-surgas">Cargue Surgas</a>
+              <ul class="sublist">
+                <li><a href="">>Proximamente</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
 
-        <section class="content">
-            <!-- Contenido principal -->
-        </section>
+      <section class="content">{% block body %} {% endblock %}</section>
     </main>
 
     <footer>
-        <p>&copy; 2024 Datos de Bogotá. Todos los derechos reservados.</p>
+      <p>&copy; 2024 Datos de Bogotá. Todos los derechos reservados.</p>
     </footer>
-
+    
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+      integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+      crossorigin="anonymous"
+    ></script>
     <script>
-        const toggleButton = document.getElementById('toggle-button');
-        const sidebar = document.getElementById('sidebar');
+      const toggleButton = document.getElementById("toggle-button");
+      const sidebar = document.getElementById("sidebar");
 
-        toggleButton.addEventListener('click', () => {
-            sidebar.classList.toggle('active');
+      toggleButton.addEventListener("click", () => {
+        sidebar.classList.toggle("active");
+      });
+      document
+        .getElementById("cargue-vanti")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+          this.parentElement.classList.toggle("active");
+        });
+      document
+        .getElementById("cargue-surgas")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+          this.parentElement.classList.toggle("active");
+        });
+
+      document
+        .getElementById("toggle-debug")
+        .addEventListener("click", function () {
+          const sidebar = document.getElementById("sidebar");
+          sidebar.classList.toggle("debug-mode");
         });
     </script>
-</body>
+  </body>
 </html>

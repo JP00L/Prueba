@@ -22,8 +22,9 @@ header {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  max-width: 1200px;
   margin: 0 auto;
+  width: 100%;
+  
 }
 
 .Name_Empresa {
@@ -41,6 +42,7 @@ header {
   border-radius: 3px;
   font-size: 14px;
 }
+
 .logout-button:hover {
   background-color: #007bff;
   color: #fff;
@@ -56,7 +58,7 @@ main {
 }
 
 .sidebar {
-  width: 250px;
+  width: 240px;
   background-color: #333;
   color: #fff;
   position: fixed;
@@ -86,11 +88,13 @@ main {
 .sidebar nav ul {
   list-style-type: none;
   padding: 0;
+  margin: 0;
+  text-align: left;
 }
 
 .sidebar nav ul li {
-  padding: 15px;
-  text-align: center;
+  padding: 8px 20px;
+  margin-top: 2px;
 }
 
 .sidebar nav ul li a {
@@ -100,6 +104,26 @@ main {
 
 .sidebar nav ul li a:hover {
   background-color: #575757;
+}
+
+.sublist {
+  width: 100%;
+  display: none;
+  list-style-type: none;
+  padding: 0;
+  margin-top: 4px;
+  text-align: right;
+}
+
+.sublist li {
+  padding: 3px 8px;
+  margin-top: 0;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.sidebar nav ul li.active .sublist {
+  display: block;
 }
 
 .content {
@@ -116,4 +140,16 @@ footer {
   text-align: center;
   position: relative;
   bottom: 0;
+}
+
+.sidebar.debug-mode {
+  border: 2px solid red;
+}
+
+.sidebar.debug-mode nav ul li {
+  border: 1px solid blue;
+}
+
+.sidebar.debug-mode .sublist li {
+  border: 1px dashed green;
 }

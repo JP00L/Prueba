@@ -6,10 +6,10 @@ app = Flask(__name__)
 app.secret_key = 'your_secret_key' 
 
 # Inicio Sesion
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
     if 'loggedin' in session and session['loggedin']:
-        return redirect(url_for('Tabla'))
+        return render_template("index.html")
     return render_template('login.html')
 
 @app.route('/login', methods=['POST'])
@@ -23,19 +23,13 @@ def login():
             if validation_result == True:
                 session['loggedin'] = True
                 session['username'] = username
-                return redirect(url_for('Tabla'))
+                return redirect(url_for('index'))
             else:
                 return render_template('login.html', error=validation_result)
         
         return redirect(url_for('index'))
     except Exception as e:
         return redirect(url_for('index'))
-
-
-# index
-@app.route('/index', methods=['GET', 'POST'])
-def Tabla():
-    return render_template("index.html")
 
 # Cerrar Sesion
 @app.route('/logout')
@@ -48,6 +42,18 @@ def logout():
 @app.route('/static/<path:filename>')
 def static_files(filename):
     return send_from_directory(os.path.join(app.root_path, 'static'), filename)
+
+
+#Paginas
+@app.route('/Maquinas_De_Procesamiento')
+def Maquinas_De_Procesamiento():
+    return render_template("Maquinas_De_Procesamiento.html")
+
+@app.route('/Dasboard_Vanti')
+def Dasboard_Vanti():
+    return render_template("Dasboard_Vanti.html")
+
+
 
 # # Manejar rutas no encontradas
 # @app.errorhandler(404)

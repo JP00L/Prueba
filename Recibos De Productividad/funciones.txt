@@ -1,0 +1,12 @@
+def Seleccionar_Sic(driver,Texto_1,Valor):
+    while True:
+        try:
+            js_script = f"""
+            var selectElement = document.getElementById('formaPrincipal:{Texto_1}');
+            selectElement.value = '{Valor}';
+            selectElement.dispatchEvent(new Event('change', {{ bubbles: true }}));
+            """
+            driver.execute_script(js_script)
+            break
+        except:
+            pass
