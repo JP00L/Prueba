@@ -8,50 +8,25 @@
 </head>
 <body>
     <header>
-        <h1>Datos de Bogotá</h1>
-        <a href="/logout" class="logout-button">Logout</a>
+        <div class="header-content">
+            <h1 class="Name_Empresa">Chargue Solutions</h1>
+            <a href="/logout" class="logout-button">Logout</a>
+        </div>
     </header>
 
     <main>
-        <section class="form-section">
-            <form action="/index" method="post">
-                <label for="rango">Selecciona un rango:</label>
-                <select name="rango" id="rango">
-                    <option value="10" {% if rango == 10 %}selected{% endif %}>10</option>
-                    <option value="20" {% if rango == 20 %}selected{% endif %}>20</option>
-                    <option value="30" {% if rango == 30 %}selected{% endif %}>30</option>
-                    <option value="50" {% if rango == 50 %}selected{% endif %}>50</option>
-                </select>
-                <input type="submit" value="Actualizar">
-            </form>
-            <p>La suma de los valores ingresados es: {{ suma }}</p>
-        </section>
+        <div id="sidebar" class="sidebar active">
+            <button id="toggle-button" class="toggle-button">☰</button>
+            <nav>
+                <ul>
+                    <li><a href="#item1">Cargue Vanti</a></li>
+                    <li><a href="#item2">Cargue Surgas</a></li>
+                </ul>
+            </nav>
+        </div>
 
-        <section class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Valor Neto</th>
-                        <th>Valor Inspector</th>
-                        <th>Valor Ingresado</th>
-                        <th>Link</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for dato in datos %}
-                    <tr>
-                        <td>{{ dato[0] }}</td>
-                        <td>{{ dato[1] }}</td>
-                        <td class="currency">{{ dato[2] }}</td>
-                        <td class="currency">{{ dato[3] }}</td>
-                        <td class="currency">{{ dato[4] }}</td>
-                        <td><a href="/Docs/{{ dato[5] }}" target="_blank">Enlace</a></td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+        <section class="content">
+            <!-- Contenido principal -->
         </section>
     </main>
 
@@ -60,14 +35,11 @@
     </footer>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const currencyElements = document.querySelectorAll('.currency');
-            currencyElements.forEach(function(element) {
-                const value = parseFloat(element.textContent);
-                if (!isNaN(value)) {
-                    element.textContent = '$' + value.toLocaleString('es-CO');
-                }
-            });
+        const toggleButton = document.getElementById('toggle-button');
+        const sidebar = document.getElementById('sidebar');
+
+        toggleButton.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
         });
     </script>
 </body>

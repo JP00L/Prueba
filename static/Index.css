@@ -4,84 +4,116 @@ body {
   font-family: Arial, sans-serif;
   background: linear-gradient(#43464a, #aacdf5);
   color: #000000;
-  text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   min-height: 100vh;
 }
 
 header {
-  margin-bottom: 20px;
+  width: 100%;
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  text-align: center;
+  position: relative;
 }
 
-main {
-  width: 100%;
+.header-content {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
   max-width: 1200px;
-  padding: 20px;
-  box-sizing: border-box;
-}
-
-.form-section {
-  margin-bottom: 20px;
-}
-
-.table-container {
-  width: 100%;
-  overflow-x: auto;
-}
-
-table {
-  border-collapse: collapse;
-  width: 100%;
   margin: 0 auto;
 }
 
-table, th, td {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
-
-th {
-  background-color: #243b55;
-  color: white;
-}
-
-tr:nth-child(even) {
-  background-color: #9b9a98;
-}
-
-tr:nth-child(odd) {
-  background-color: #f2f2f2;
-}
-
-tr:hover {
-  background-color: #5ada5e;
-}
-
-th, td {
-  text-align: center;
-}
-
-footer {
-  margin-top: 20px;
+.Name_Empresa {
+  margin: 0;
+  font-size: 24px;
+  margin-right: 20px; 
 }
 
 .logout-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
   background-color: #f8f9fa;
   color: #007bff;
-  padding: 5px 10px;
+  padding: 5px 15px;
   text-decoration: none;
   border: 1px solid #007bff;
   border-radius: 3px;
   font-size: 14px;
 }
-
 .logout-button:hover {
   background-color: #007bff;
   color: #fff;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #333;
+  color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  padding-top: 60px;
+  transition: transform 0.3s ease;
+}
+
+.sidebar.active {
+  transform: translateX(-250px);
+}
+
+.toggle-button {
+  position: absolute;
+  top: 2px;
+  left: 250px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.sidebar nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar nav ul li {
+  padding: 15px;
+  text-align: center;
+}
+
+.sidebar nav ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.sidebar nav ul li a:hover {
+  background-color: #575757;
+}
+
+.content {
+  margin-left: 250px;
+  padding: 20px;
+  width: 100%;
+}
+
+footer {
+  width: 100%;
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+  position: relative;
+  bottom: 0;
 }
