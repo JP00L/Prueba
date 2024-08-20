@@ -45,11 +45,11 @@ def static_files(filename):
 
 
 #Paginas
-@app.route('/Maquinas_De_Procesamiento')
+@app.route('/Maquinas_De_Procesamiento', methods=['GET', 'POST'])
 def Maquinas_De_Procesamiento():
     return render_template("Maquinas_De_Procesamiento.html")
 
-@app.route('/Dasboard_Vanti')
+@app.route('/Dasboard_Vanti', methods=['GET', 'POST'])
 def Dasboard_Vanti():
     return render_template("Dasboard_Vanti.html")
 
