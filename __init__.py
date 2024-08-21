@@ -9,30 +9,30 @@ app.secret_key = 'your_secret_key'
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if 'loggedin' in session and session['loggedin']:
+        
         return render_template("index.html")
     return render_template('login.html')
 
-@app.route('/login', methods=['POST'])
+@app.route('/login', methods=['GET','POST'])
 def login():
     try:
         if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
             username = request.form['username']
             password = request.form['password']
             validation_result = validar_usuario(username, password)
-            
-            if validation_result == True:
+            if validation_result[0] == True:
                 session['loggedin'] = True
                 session['username'] = username
+                session['compani_Id'] =validation_result[1]
                 return redirect(url_for('index'))
             else:
                 return render_template('login.html', error=validation_result)
-        
         return redirect(url_for('index'))
     except Exception as e:
         return redirect(url_for('index'))
 
 # Cerrar Sesion
-@app.route('/logout')
+@app.route('/logout', methods=['GET'])
 def logout():
     session.pop('loggedin', None)
     session.pop('username', None)

@@ -24,7 +24,7 @@ def validar_usuario(username, password):
                 if usuarios[0][4] == "inactivo":
                     return f"Usuario Deshabilitado" 
                 else:
-                    return True
+                    return True , usuarios[0][5]
             else:
                 return f"Contraseña Errada"
         else:
