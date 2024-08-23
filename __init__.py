@@ -10,7 +10,7 @@ app.secret_key = 'your_secret_key'
 def index():
     if 'loggedin' in session and session['loggedin']:
         
-        return render_template("index.html")
+        return render_template("index1.html")
     return render_template('login.html')
 
 @app.route('/login', methods=['GET','POST'])

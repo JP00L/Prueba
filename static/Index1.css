@@ -1,24 +1,96 @@
 body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(#43464a, #aacdf5);
-    color: #000000;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
-.toggle-button {
-    background-color: #333;
-    color: #fff;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    font-size: 18px;
-  }
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(#43464a, #aacdf5);
+  color: #000000;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 
-  .Name_Empresa {
-    margin: 0;
-    font-size: 24px;
-    margin-right: 20px; 
-  }
+.toggle-button {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 18px;
+  position: relative;
+  z-index: 1001;
+  border-radius: 60px;
+  transition: margin-left 0.5s ease, transform 0.5s ease; /* Añade transición para el cambio del icono */
+}
+
+.divider {
+  border: none; /* Elimina el borde predeterminado */
+  height: 2px; /* Ajusta el grosor de la línea */
+  background-color: white; /* Color de la línea */
+  width: 100%; /* Asegura que la línea ocupe todo el ancho del contenedor */
+  margin: 20px 0; /* Espaciado arriba y abajo de la línea */
+}
+
+#Name_Compani {
+  text-align: center;
+  width: 100%; 
+  margin-top: -90px;
+  color: #fff;
+}
+
+#Name_Compani h1 {
+  display: inline-block; /* Asegura que el texto dentro de h1 se comporte como un bloque en línea */
+  margin: 5px; /* Elimina márgenes predeterminados para un mejor control del espaciado */
+}
+
+.toggle-button.open {
+  transform: rotate(180deg); /* Efecto de rotación como ejemplo */
+}
+
+.Name_Empresa {
+  font-size: 30px;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: -250px;
+  background-color: #333;
+  overflow-x: hidden;
+  transition: left 0.5s ease;
+  z-index: 1000;
+  padding-top: 60px;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  padding: 8px 16px;
+  text-align: left;
+}
+
+.sidebar ul li a {
+  color: white;
+  text-decoration: none;
+  display: block;
+}
+
+.sidebar ul li a:hover {
+  background-color: #575757;
+}
+
+/* Sublist */
+.sublist {
+  display: none; /* Oculta la sublista por defecto */
+  padding-left: 10px; /* Sangría para la sublista */
+}
+
+#Services{
+  color: #ffb700;
+
+}
