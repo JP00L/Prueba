@@ -33,5 +33,19 @@ def validar_usuario(username, password):
         return f"Error en validar_usuario"
 
 
-
+def validar_maquina(compania_id):
+    try:
+        consulta = "SELECT * FROM empleado WHERE compania_id = %s"
+        with mysql.connector.connect(user=User, password=Pasww, host=Hots, database=Database) as conexion:
+            with conexion.cursor() as cursor:
+                cursor.execute(consulta, (compania_id,))
+                columnas = cursor.column_names
+                maquinas = cursor.fetchall()
+                
+                # Construir una lista de diccionarios con los nombres de las columnas
+                resultado = [dict(zip(columnas, maquina)) for maquina in maquinas]
+                
+                return resultado
+    except Exception as e:
+        return f"Error en validar_maquina: {str(e)}"
 

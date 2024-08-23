@@ -15,13 +15,14 @@
 
   <body>
     <div
-      class="text-bg-dark p-2 d-flex align-items-center justify-content-between"
+      class="text-bg-dark p-0 d-flex align-items-center justify-content-between"
     >
-      <div>
-        <button id="toggle-button" class="toggle-button p-2 px-3">☰</button>
+      <div class="d-flex align-items-center">
+        <button id="toggle-button" class="toggle-button p-1 px-2">☰</button>
+        <h3 class="Name_Empresa me-3 mb-0 ms-2 fs-6">Chargue Solutions</h1>
       </div>
       <div class="d-flex align-items-center">
-        <h1 class="Name_Empresa me-3 mb-1 t">Chargue Solutions</h1>
+        
         <button type="button" id="Logout" class="btn btn-outline-danger me-3">
           Salir
         </button>
@@ -30,13 +31,15 @@
     <div id="sidebar" class="sidebar">
       <div id="Name_Compani">
         <hr class="divider">
-        <h1 class="fs-2">AAA GAMA INSPECCIONES</h1>
+        <h1 class="fs-3">{{datos[0]["nombre"]}}</h1>
+        <h1 class="fs-3">Prueba</h1>
+
         <hr class="divider">
       </div>
       <div>
         <ul>
           <li>
-            <a href="" id="Services" class="fs-3 fw-bold">Cargue Vanti</a>
+            <a href="" id="Services" class="fs-4 fw-bold">Cargue Vanti</a>
             <ul class="sublist">
               <li>
                 <a href="/Maquinas_De_Procesamiento"
@@ -47,19 +50,19 @@
             </ul>
           </li>
           <li>
-            <a href="" id="Services" class="fs-3 fw-bold">Cargue Surgas</a>
+            <a href="" id="Services" class="fs-4 fw-bold">Cargue Surgas</a>
             <ul class="sublist">
               <li><a href="#">coming Soon</a></li>
             </ul>
           </li>
           <li>
-            <a href="" id="Services" class="fs-3 fw-bold">Cargue Llanogas</a>
+            <a href="" id="Services" class="fs-4 fw-bold">Cargue Llanogas</a>
             <ul class="sublist">
               <li><a href="#">coming Soon</a></li>
             </ul>
           </li>
           <li>
-            <a href="" id="Services" class="fs-3 fw-bold">Cargue Alcanos</a>
+            <a href="" id="Services" class="fs-4 fw-bold">Cargue Alcanos</a>
             <ul class="sublist">
               <li><a href="#">coming Soon</a></li>
             </ul>

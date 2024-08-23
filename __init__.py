@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify, send_from_directory
-from Funciones import validar_usuario
+from Funciones import validar_usuario,validar_maquina
 import os
 
 app = Flask(__name__)
@@ -9,8 +9,9 @@ app.secret_key = 'your_secret_key'
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if 'loggedin' in session and session['loggedin']:
-        
-        return render_template("index1.html")
+        datos = validar_maquina(session["compani_Id"])
+        print(datos)
+        return render_template("index1.html", datos=datos)
     return render_template('login.html')
 
 @app.route('/login', methods=['GET','POST'])
@@ -47,6 +48,7 @@ def static_files(filename):
 #Paginas
 @app.route('/Maquinas_De_Procesamiento', methods=['GET', 'POST'])
 def Maquinas_De_Procesamiento():
+    # print(session["compani_Id"])
     return render_template("Maquinas_De_Procesamiento.html")
 
 @app.route('/Dasboard_Vanti', methods=['GET', 'POST'])

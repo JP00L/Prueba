@@ -7,12 +7,12 @@ document.addEventListener("DOMContentLoaded", function() {
     if (sidebarState === 'open') {
         sidebar.style.left = '0';
         toggleButton.innerHTML = 'X';
-        toggleButton.style.marginLeft = '250px';
+        toggleButton.style.marginLeft = '254px';
         toggleButton.classList.add('open');
     } else {
         sidebar.style.left = '-250px';
         toggleButton.innerHTML = '☰';
-        toggleButton.style.marginLeft = '0';
+        toggleButton.style.marginLeft = '4px';
         toggleButton.classList.remove('open');
     }
 
@@ -21,13 +21,13 @@ document.addEventListener("DOMContentLoaded", function() {
         if (sidebar.style.left === "-250px" || sidebar.style.left === "") {
             sidebar.style.left = "0";
             toggleButton.innerHTML = "X";
-            toggleButton.style.marginLeft = "250px";
+            toggleButton.style.marginLeft = "254px";
             toggleButton.classList.add('open');
             localStorage.setItem('sidebarState', 'open'); // Guarda el estado en localStorage
         } else {
             sidebar.style.left = "-250px";
             toggleButton.innerHTML = "☰";
-            toggleButton.style.marginLeft = "0";
+            toggleButton.style.marginLeft = "4px";
             toggleButton.classList.remove('open');
             localStorage.setItem('sidebarState', 'closed'); // Guarda el estado en localStorage
         }
