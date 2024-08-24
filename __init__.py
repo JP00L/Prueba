@@ -48,7 +48,7 @@ def logout():
 @app.route('/static/<path:filename>')
 def static_files(filename):
     return send_from_directory(os.path.join(app.root_path, 'static'), filename)
-@app.route('/static/Js/<path:filename>')
+@app.route('/static/J/<path:filename>')
 def static_files(filename):
     return send_from_directory(os.path.join(app.root_path, 'static'), filename)
 
