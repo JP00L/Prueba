@@ -36,7 +36,7 @@ def validar_usuario(username, password):
             cursor.close()
         if conexion:
             conexion.close()
-def Extracccion(compania_id, MaquinasDeTrabajo=None):
+def Extracccion(compania_id, Sesion=None,VtMachine=None):
     RETORNO=None
     try:
         consulta = "SELECT * FROM empleado WHERE compania_id = %s"
@@ -52,17 +52,29 @@ def Extracccion(compania_id, MaquinasDeTrabajo=None):
                     for maquina in maquinas
                 ]
                 resultado = {"Datos Comapñia": Lista}
-
-                if resultado["Datos Comapñia"][0]["estado"] == "activo":
-                    RETORNO=resultado
-
-                if resultado["Datos Comapñia"][0]["estado"] == "inactivo":
-                    return "Usuario Deshabilitado"
                 
-                if MaquinasDeTrabajo is not None:
-                    "Otra Solicitud"
-                
-                return RETORNO
+                if Sesion["username"] == resultado["Datos Comapñia"][0]["usuario"]:
+                    if resultado["Datos Comapñia"][0]["estado"] == "activo":
+                        RETORNO=resultado
+
+                    if resultado["Datos Comapñia"][0]["estado"] == "inactivo":
+                        return "Usuario Deshabilitado"
+                    
+                    if VtMachine is not None:
+                        consulta = "SELECT * FROM MaquinaDeTrabajo WHERE compania_id = %s"
+                        cursor.execute(consulta, (compania_id,))
+                        columnas = cursor.column_names
+                        maquinas = cursor.fetchall()
+                        columnas_excluir = [] 
+                        Lista = [
+                            {col: valor for col, valor in zip(columnas, maquina) if col not in columnas_excluir}
+                            for maquina in maquinas
+                        ]
+                        
+                        RETORNO["VtMachine"]=Lista
+                    return RETORNO
+                else:
+                    return "Usuario Infringió, Los Parámetros Establecidos, Usuario Inhabilitado"
     except Exception as e:
         return f"Error en validar_maquina: {str(e)}"
     finally:

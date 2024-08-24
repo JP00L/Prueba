@@ -12,9 +12,9 @@ app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=1)  # Establece la du
 def index():
     if 'loggedin' in session and session['loggedin']:
         datos = Extracccion(session["compani_Id"])
-        if datos =="Usuario Deshabilitado":
+        if datos =="Usuario Deshabilitado" or datos =="Usuario Infringió, Los Parámetros Establecidos, Usuario Inhabilitado":
             return render_template('login.html', error=datos)
-        print(datos)
+        print(session)
         return render_template("index1.html", datos=datos)
     return render_template('login.html')
 
@@ -48,7 +48,9 @@ def logout():
 @app.route('/static/<path:filename>')
 def static_files(filename):
     return send_from_directory(os.path.join(app.root_path, 'static'), filename)
-
+@app.route('/static/Js/<path:filename>')
+def static_files(filename):
+    return send_from_directory(os.path.join(app.root_path, 'static'), filename)
 
 
 
