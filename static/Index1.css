@@ -31,10 +31,10 @@ body {
 }
 
 #Name_Compani {
-
+  
   text-align: center;
   width: 100%;
-  max-width: 500px;
+  /* max-width: 500px; */
   margin-top: -90px;
   color: #fff;
 }

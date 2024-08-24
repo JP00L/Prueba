@@ -1,9 +1,52 @@
 {% extends 'index1.html' %}
 {% block body %}
+<div class="container mt-5">
+    <div class="row">
+        {% for machine in datos["VtMachine"] %}
+        <div class="col-md-4">
+            <div class="card mb-4" style="width: 20rem; height: 10rem; overflow: hidden; position: relative;">
+                <button class="btn btn-light position-absolute top-0 end-0 m-1 p-1" data-bs-toggle="modal" data-bs-target="#editModal{{ machine.id }}">
+                    <i class="bi bi-pencil"></i>
+                </button>
+                <div class="card-body">
+                    <h5 class="card-title">ID: {{ machine.id }}</h5>
+                    <p class="card-text text-truncate">
+                        <strong>Cookie:</strong> {{ machine.cookie }}<br>
+                        <strong>Sesion:</strong> {{ machine.parametro }}<br>
+                        <strong>Estado:</strong> {{ machine.estado }}
+                    </p>
+                </div>
+            </div>
+        </div>
 
-<div>
-    
+        <!-- Modal -->
+        <div class="modal fade" id="editModal{{ machine.id }}" tabindex="-1" aria-labelledby="editModalLabel{{ machine.id }}" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editModalLabel{{ machine.id }}">Editar Máquina ID: {{ machine.id }}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form method="POST" action="{{ url_for('update_machine', machine_id=machine.id) }}">
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="cookie{{ machine.id }}" class="form-label">Cookie</label>
+                                <input type="text" class="form-control" id="cookie{{ machine.id }}" name="cookie" value="{{ machine.cookie }}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="parametro{{ machine.id }}" class="form-label">Sesion</label>
+                                <input type="text" class="form-control" id="parametro{{ machine.id }}" name="parametro" value="{{ machine.parametro }}">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 </div>
-
-
 {% endblock %}
