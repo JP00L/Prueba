@@ -31,9 +31,13 @@ def validar_usuario(username, password):
             return "Usuario Invalido"
     except Exception as e:
         return f"Error en validar_usuario"
-
-
-def validar_maquina(compania_id):
+    finally:
+        if cursor:
+            cursor.close()
+        if conexion:
+            conexion.close()
+def Extracccion(compania_id, MaquinasDeTrabajo=None):
+    RETORNO=None
     try:
         consulta = "SELECT * FROM empleado WHERE compania_id = %s"
         with mysql.connector.connect(user=User, password=Pasww, host=Hots, database=Database) as conexion:
@@ -42,10 +46,33 @@ def validar_maquina(compania_id):
                 columnas = cursor.column_names
                 maquinas = cursor.fetchall()
                 
-                # Construir una lista de diccionarios con los nombres de las columnas
-                resultado = [dict(zip(columnas, maquina)) for maquina in maquinas]
+                columnas_excluir = ['id', 'contraseña'] 
+                Lista = [
+                    {col: valor for col, valor in zip(columnas, maquina) if col not in columnas_excluir}
+                    for maquina in maquinas
+                ]
+                resultado = {"Datos Comapñia": Lista}
+
+                if resultado["Datos Comapñia"][0]["estado"] == "activo":
+                    RETORNO=resultado
+
+                if resultado["Datos Comapñia"][0]["estado"] == "inactivo":
+                    return "Usuario Deshabilitado"
                 
-                return resultado
+                if MaquinasDeTrabajo is not None:
+                    "Otra Solicitud"
+                
+                return RETORNO
     except Exception as e:
         return f"Error en validar_maquina: {str(e)}"
+    finally:
+        if cursor:
+            cursor.close()
+        if conexion:
+            conexion.close()
+
+
+
+
+
 

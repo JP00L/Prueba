@@ -1,15 +1,19 @@
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify, send_from_directory
-from Funciones import validar_usuario,validar_maquina
+from Funciones import validar_usuario, Extracccion
+from datetime import timedelta
 import os
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key' 
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=1)  # Establece la duración de la sesión a 30 minutos
 
 # Inicio Sesion
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if 'loggedin' in session and session['loggedin']:
-        datos = validar_maquina(session["compani_Id"])
+        datos = Extracccion(session["compani_Id"])
+        if datos =="Usuario Deshabilitado":
+            return render_template('login.html', error=datos)
         print(datos)
         return render_template("index1.html", datos=datos)
     return render_template('login.html')
@@ -22,9 +26,10 @@ def login():
             password = request.form['password']
             validation_result = validar_usuario(username, password)
             if validation_result[0] == True:
+                session.permanent = True
                 session['loggedin'] = True
                 session['username'] = username
-                session['compani_Id'] =validation_result[1]
+                session['compani_Id'] = validation_result[1]
                 return redirect(url_for('index'))
             else:
                 return render_template('login.html', error=validation_result)
@@ -45,10 +50,10 @@ def static_files(filename):
     return send_from_directory(os.path.join(app.root_path, 'static'), filename)
 
 
-#Paginas
+
+
 @app.route('/Maquinas_De_Procesamiento', methods=['GET', 'POST'])
 def Maquinas_De_Procesamiento():
-    # print(session["compani_Id"])
     return render_template("Maquinas_De_Procesamiento.html")
 
 @app.route('/Dasboard_Vanti', methods=['GET', 'POST'])

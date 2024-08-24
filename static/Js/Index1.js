@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function() {
     if (sidebarState === 'open') {
         sidebar.style.left = '0';
         toggleButton.innerHTML = 'X';
-        toggleButton.style.marginLeft = '254px';
+        toggleButton.style.marginLeft = '234px';
         toggleButton.classList.add('open');
     } else {
         sidebar.style.left = '-250px';
@@ -18,14 +18,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Añade el evento click para alternar la barra lateral
     toggleButton.addEventListener("click", function() {
-        if (sidebar.style.left === "-250px" || sidebar.style.left === "") {
+        if (sidebar.style.left === "-230px" || sidebar.style.left === "") {
             sidebar.style.left = "0";
             toggleButton.innerHTML = "X";
-            toggleButton.style.marginLeft = "254px";
+            toggleButton.style.marginLeft = "234px";
             toggleButton.classList.add('open');
             localStorage.setItem('sidebarState', 'open'); // Guarda el estado en localStorage
         } else {
-            sidebar.style.left = "-250px";
+            sidebar.style.left = "-230px";
             toggleButton.innerHTML = "☰";
             toggleButton.style.marginLeft = "4px";
             toggleButton.classList.remove('open');
