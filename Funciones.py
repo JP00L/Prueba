@@ -42,21 +42,15 @@ def Extracccion(Sesion,VtMachine=None):
     conexion = None
     RETORNO=None
     try:
-        consulta = "SELECT * FROM empleado WHERE compania_id = %s"
+        consulta = "SELECT * FROM empleado WHERE compania_id = %s AND usuario = %s "
         with mysql.connector.connect(user=User, password=Pasww, host=Hots, database=Database) as conexion:
             with conexion.cursor() as cursor:
-                cursor.execute(consulta, (Sesion["compani_Id"],))
+                cursor.execute(consulta, (Sesion["compani_Id"],Sesion["username"],))
                 columnas = cursor.column_names
                 DATA = cursor.fetchall()
                 columnas_excluir = ['id', 'contraseña'] 
                 Lista = [{col: valor for col, valor in zip(columnas, datos) if col not in columnas_excluir}for datos in DATA]
-                resultado = {"Datos Comapñia": Lista}
-                print(resultado)
-                print(Sesion["username"])
-                print(resultado["Datos Comapñia"][0]["usuario"])
-
-                #Necesita hacer una validacion con todos los usuarios de la compañia y encontrar el usuario correcto
-                
+                resultado = {"Datos Comapñia": Lista}                
                 if Sesion["username"] == resultado["Datos Comapñia"][0]["usuario"]:
                     if resultado["Datos Comapñia"][0]["estado"] == "activo":
                         RETORNO=resultado
@@ -70,12 +64,9 @@ def Extracccion(Sesion,VtMachine=None):
                         columnas = cursor.column_names
                         maquinas = cursor.fetchall()
                         columnas_excluir = [] 
-                        Lista = [
-                            {col: valor for col, valor in zip(columnas, maquina) if col not in columnas_excluir}
-                            for maquina in maquinas
-                        ]
-                        
+                        Lista = [{col: valor for col, valor in zip(columnas, maquina) if col not in columnas_excluir}for maquina in maquinas]
                         RETORNO["VtMachine"]=Lista
+
                     return RETORNO
                 else:
                     return "Usuario Infringió, Los Parámetros Establecidos, Usuario Inhabilitado"
@@ -90,10 +81,11 @@ def Actualizaciones_Machines(Sesion,request,machine_id):
     cursor = None
     conexion = None
     try:
-        consulta = "SELECT * FROM empleado WHERE compania_id = %s"
+
+        consulta = "SELECT * FROM empleado WHERE compania_id = %s AND usuario = %s "
         with mysql.connector.connect(user=User, password=Pasww, host=Hots, database=Database) as conexion:
             with conexion.cursor() as cursor:
-                cursor.execute(consulta, (Sesion["compani_Id"],))
+                cursor.execute(consulta, (Sesion["compani_Id"],Sesion["username"],))
                 columnas = cursor.column_names
                 DATA = cursor.fetchall()
                 columnas_excluir = ['id', 'contraseña'] 
@@ -105,13 +97,12 @@ def Actualizaciones_Machines(Sesion,request,machine_id):
                         return "Usuario Deshabilitado"
 
                     consulta = "UPDATE MaquinaDeTrabajo SET cookie = %s, parametro = %s, estado = %s WHERE id = %s AND compania_id = %s"
-                    print(request.form['cookie'])
                     cursor.execute(consulta, (request.form['cookie'], request.form['parametro'], 'activo', machine_id, Sesion['compani_Id']))
                     conexion.commit()
-
                 else:
                     return "Usuario Infringió, Los Parámetros Establecidos, Usuario Inhabilitado"
     except Exception as e:
+        print(e)
         return f"Error en Actualizaciones_Machines"
     finally:
         if cursor:

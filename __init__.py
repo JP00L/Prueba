@@ -48,7 +48,6 @@ def static_J_files(filename):
 def index():
     if 'loggedin' in session and session['loggedin']:
         datos = Extracccion(session)
-        print(datos)
         if datos =="Usuario Deshabilitado" or datos =="Usuario Infringió, Los Parámetros Establecidos, Usuario Inhabilitado":
             return render_template('login.html', error=datos)
         return render_template("index1.html", datos=datos)
@@ -65,6 +64,7 @@ def Maquinas_De_Procesamiento():
     return render_template('login.html')
 @app.route('/update_machine/<int:machine_id>', methods=['POST'])
 def update_machine(machine_id):
+    print(request.form)
     if 'loggedin' in session and session['loggedin']:
         Actualizaciones_Machines(session,request,machine_id)
         return redirect(url_for('Maquinas_De_Procesamiento'))
