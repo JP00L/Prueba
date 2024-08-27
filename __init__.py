@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify, send_from_directory
-from Funciones import validar_usuario, Extracccion,Actualizaciones_Machines
+# from Funciones import validar_usuario, Extracccion,Actualizaciones_Machines
+from Funciones_2 import Login_Validation,Funciones_Request
 from datetime import timedelta
 import os
 
@@ -13,7 +14,7 @@ def login():
         if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
             username = request.form['username']
             password = request.form['password']
-            validation_result = validar_usuario(username, password)
+            validation_result = Login_Validation(username, password)
             if validation_result[0] == True:
                 session.permanent = True
                 session['loggedin'] = True
@@ -47,7 +48,7 @@ def static_J_files(filename):
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if 'loggedin' in session and session['loggedin']:
-        datos = Extracccion(session)
+        datos = Funciones_Request(session)
         if datos =="Usuario Deshabilitado" or datos =="Usuario Infringió, Los Parámetros Establecidos, Usuario Inhabilitado":
             return render_template('login.html', error=datos)
         return render_template("index1.html", datos=datos)
@@ -57,7 +58,7 @@ def index():
 @app.route('/Maquinas_De_Procesamiento', methods=['GET', 'POST'])
 def Maquinas_De_Procesamiento():
     if 'loggedin' in session and session['loggedin']:
-        datos = Extracccion(session,True)
+        datos = Funciones_Request(session,{"Sheet": "MaquinaDeTrabajo","Type": "Get",})
         if datos =="Usuario Deshabilitado" or datos =="Usuario Infringió, Los Parámetros Establecidos, Usuario Inhabilitado":
             return render_template('login.html', error=datos)
         return render_template("Maquinas_De_Procesamiento.html", datos=datos)

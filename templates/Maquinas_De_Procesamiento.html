@@ -12,7 +12,7 @@
                     <h5 class="card-title">ID: {{ machine.id }}</h5>
                     <p class="card-text text-truncate">
                         <strong>Cookie:</strong> {{ machine.cookie }}<br>
-                        <strong>Sesion:</strong> {{ machine.parametro }}<br>
+                        <strong>Sesion:</strong> {{ machine.sesion }}<br>
                         <strong>Estado:</strong> {{ machine.estado }}
                     </p>
                 </div>
@@ -34,8 +34,8 @@
                                 <input type="text" class="form-control" id="cookie{{ machine.id }}" name="cookie" value="{{ machine.cookie }}">
                             </div>
                             <div class="mb-3">
-                                <label for="parametro{{ machine.id }}" class="form-label">Sesion</label>
-                                <input type="text" class="form-control" id="parametro{{ machine.id }}" name="parametro" value="{{ machine.parametro }}">
+                                <label for="sesion{{ machine.id }}" class="form-label">Sesion</label>
+                                <input type="text" class="form-control" id="sesion{{ machine.id }}" name="sesion" value="{{ machine.sesion }}">
                             </div>
                         </div>
                         <div class="modal-footer">
