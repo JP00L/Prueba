@@ -65,11 +65,14 @@ def Maquinas_De_Procesamiento():
     return render_template('login.html')
 @app.route('/update_machine/<int:machine_id>', methods=['POST'])
 def update_machine(machine_id):
-    print(request.form)
-    if 'loggedin' in session and session['loggedin']:
-        Actualizaciones_Machines(session,request,machine_id)
-        return redirect(url_for('Maquinas_De_Procesamiento'))
-    return redirect(url_for('index'))
+    print("Form Data:", request.form)
+    for key, value in request.form.items():
+        print(f"{key}: {value}")
+    return "OK"
+    # if 'loggedin' in session and session['loggedin']:
+    #     Actualizaciones_Machines(session,request,machine_id)
+    #     return redirect(url_for('Maquinas_De_Procesamiento'))
+    # return redirect(url_for('index'))
 
 #>Tablas
 @app.route('/Dasboard_Vanti', methods=['GET', 'POST'])

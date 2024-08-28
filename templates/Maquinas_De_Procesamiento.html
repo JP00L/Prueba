@@ -5,7 +5,13 @@
         {% for machine in datos["VtMachine"] %}
         <div class="col-12 col-md-6 col-lg-4 mb-4">
             <div class="card {% if machine.estado == 'activo' %}bg-success text-white{% elif machine.estado == 'inactivo' %}bg-danger text-white{% else %}bg-secondary text-white{% endif %}" style="width: 20rem; height: 10rem; overflow: hidden; position: relative;">
-                <button class="btn btn-light position-absolute top-0 end-0 m-1 p-1" data-bs-toggle="modal" data-bs-target="#editModal{{ machine.id }}">
+                <button 
+                    class="btn btn-light position-absolute top-0 end-0 m-1 p-1" 
+                    data-bs-toggle="modal" 
+                    data-bs-target="#editModal" 
+                    data-id="{{ machine.id }}"
+                    data-cookie="{{ machine.cookie }}"
+                    data-sesion="{{ machine.sesion }}">
                     <i class="bi bi-pencil"></i>
                 </button>
                 <div class="card-body">
@@ -18,37 +24,63 @@
                 </div>
             </div>
         </div>
-
-        <!-- Modal -->
-        <div class="modal fade" id="editModal{{ machine.id }}" tabindex="-1" aria-labelledby="editModalLabel{{ machine.id }}" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="editModalLabel{{ machine.id }}">Editar Máquina ID: {{ machine.id }}</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <form method="POST" action="{{ url_for('update_machine', machine_id=machine.id) }}">
-                        <div class="modal-body">
-                            <div class="mb-3">
-                                <label for="cookie{{ machine.id }}" class="form-label">Cookie</label>
-                                <input type="text" class="form-control" id="cookie{{ machine.id }}" name="cookie" value="{{ machine.cookie }}">
-                            </div>
-                            <div class="mb-3">
-                                <label for="sesion{{ machine.id }}" class="form-label">Sesion</label>
-                                <input type="text" class="form-control" id="sesion{{ machine.id }}" name="sesion" value="{{ machine.sesion }}">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-primary">Guardar cambios</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
         {% endfor %}
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">Editar Máquina</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="POST" id="editForm">
+                <!-- Campo oculto para compania_id -->
+                <input type="hidden" name="Sheet" value="MaquinaDeTrabajo"> 
+                <input type="hidden" name="Type" value="update">
+
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="modalCookie" class="form-label">Cookie</label>
+                        <input type="text" class="form-control" id="modalCookie" name="cookie">
+                    </div>
+                    <div class="mb-3">
+                        <label for="modalSesion" class="form-label">Sesion</label>
+                        <input type="text" class="form-control" id="modalSesion" name="sesion">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+var editModal = document.getElementById('editModal');
+editModal.addEventListener('show.bs.modal', function (event) {
+    var button = event.relatedTarget;
+
+    var machineId = button.getAttribute('data-id');
+    var cookie = button.getAttribute('data-cookie');
+    var sesion = button.getAttribute('data-sesion');
+
+    var modalCookie = editModal.querySelector('#modalCookie');
+    var modalSesion = editModal.querySelector('#modalSesion');
+
+    modalCookie.value = cookie;
+    modalSesion.value = sesion;
+
+    var urlBase = "{{ url_for('update_machine', machine_id=0) }}";
+    urlBase = urlBase.replace('/0', '');
+    var form = editModal.querySelector('#editForm');
+    form.action = urlBase + '/' + machineId;
+});
+
+</script>
+
 {% endblock %}
-
-
