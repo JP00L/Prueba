@@ -69,3 +69,12 @@ document.querySelectorAll('.sidebar ul > li > a').forEach(function(item) {
     });
 });
 
+document.querySelectorAll('.radio-inputs .name').forEach(function(span) {
+    span.addEventListener('click', function() {
+        // Cambiar el radio button asociado a checked
+        this.previousElementSibling.checked = true;
+
+        // Redirigir al enlace especificado en el atributo data-link
+        window.location.href = this.getAttribute('data-link');
+    });
+});

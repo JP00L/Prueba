@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subir PDF</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="upload-form">
+        <h2>Subir PDF y Extraer Datos</h2>
+        <form action="/" method="post" enctype="multipart/form-data">
+            <input type="file" name="pdf_file" accept="application/pdf" required>
+            <button type="submit">Subir y Extraer</button>
+        </form>
+        <div id="output"></div>
+    </div>
+    <script>
+        document.querySelector('form').onsubmit = function(event) {
+            event.preventDefault();
+            let formData = new FormData(this);
+
+            fetch('/', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                let output = document.getElementById('output');
+                output.innerHTML = '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
+            })
+            .catch(error => console.error('Error:', error));
+        };
+    </script>
+</body>
+</html>
