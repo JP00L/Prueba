@@ -8,13 +8,19 @@ KEY = 'key.json'
 SPREADSHEET_ID = '1Fdw6tCFKXqZd2hMDBbztSmhmus3hSFTP7BEb9UkAdZA'
 LIST_REQUEST = {
     "empleado": {
-        "id": True,
+        "Type": None,
         "Sheet": "empleado!A:F"
     },
-    "MaquinaDeTrabajo": {
-        "id": True,
+    "VtMachine": {
+        "Type": None,
         "Sheet": "MaquinaDeTrabajo!A:E"
+    },
+    "Vanti": {
+        "Type": "Table",
+        "Sheet": "TableVanti!A:E"
     }
+
+
 }
 
 creds = service_account.Credentials.from_service_account_file(KEY, scopes=SCOPES)
@@ -30,18 +36,20 @@ def get_sheet_id(sheet_name):
             return sheet_item.get("properties", {}).get("sheetId")
     return None
 
-def Get_Rq(sheet_range, exclusions=None):
+def Get_Rq(sheet_range, exclusions=None,Table=None):
     try:
         result = sheet.values().get(spreadsheetId=SPREADSHEET_ID, range=sheet_range).execute()
         values = result.get('values', [])
         columnas = values[0]
 
         exclusions = exclusions.split(",") if exclusions else []
-
         lista = []
-        for datos in values[1:]:
-            item = {col: valor for col, valor in zip(columnas, datos) if col not in exclusions}
-            lista.append(item)
+        if Table is not None:
+            return values[0]
+        else:
+            for datos in values[1:]:
+                item = {col: valor for col, valor in zip(columnas, datos) if col not in exclusions}
+                lista.append(item)
 
         return lista
     except Exception as e:
@@ -152,9 +160,13 @@ def Funciones_Request(sesion, data=None):
 
                 if data:
                     if data.get("Type") == "Get":
-                        maquinas = Get_Rq(LIST_REQUEST[data["Sheet"]]["Sheet"])
-                        maquinas_filtradas = [d for d in maquinas if str(d.get("compania_id")) == str(sesion.get("compani_Id"))]
-                        lista["VtMachine"] = maquinas_filtradas
+                        Datos_Rq = Get_Rq(LIST_REQUEST[data["Sheet"]]["Sheet"])
+                        Datos_Rq_filtradas = [d for d in Datos_Rq if str(d.get("compania_id")) == str(sesion.get("compani_Id"))]
+                        if LIST_REQUEST[data["Sheet"]]["Type"] =="Table":
+                            Table_Th= Datos_Rq = Get_Rq(LIST_REQUEST[data["Sheet"]]["Sheet"],Table=True)
+                            lista["Tabla"]={"Th":Table_Th,"Tr":Datos_Rq_filtradas}
+                        else:
+                            lista[data["Sheet"]] = Datos_Rq_filtradas
                         # lista.append({"VtMachine": maquinas_filtradas})
 
                     elif data.get("Type") == "input":

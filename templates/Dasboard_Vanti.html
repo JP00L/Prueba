@@ -1,5 +1,29 @@
 {% extends 'index1.html' %}
 {% block body %}
 
-"GAMA"
+<div class="w-100 p-3 text-white">
+    <div class="radio-inputs">
+        <label class="radio">
+          <input type="radio" name="radio" checked="">
+          <span class="name">General</span>
+        </label>
+        <label class="radio">
+          <input type="radio" name="radio">
+          <span class="name">Aprobados</span>
+        </label>
+        <label class="radio">
+          <input type="radio" name="radio">
+          <span class="name">Rechazos</span>
+        </label>
+        <label class="radio">
+            <input type="radio" name="radio">
+            <span class="name">Cargue Manual</span>
+        </label>
+        <label class="radio">
+            <input type="radio" name="radio">
+            <span class="name">Cargue Inteligente</span>
+        </label>
+    </div>
+
+
 {% endblock %}

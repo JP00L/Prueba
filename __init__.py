@@ -51,18 +51,23 @@ def index():
         datos = Funciones_Request(session)
         if datos =="Usuario Deshabilitado" or datos =="Usuario Infringió, Los Parámetros Establecidos, Usuario Inhabilitado":
             return render_template('login.html', error=datos)
+
         return render_template("index1.html", datos=datos)
     return render_template('login.html')
 
 #>Maquinas
-@app.route('/Maquinas_De_Procesamiento', methods=['GET', 'POST'])
-def Maquinas_De_Procesamiento():
+@app.route('/VtMachine', methods=['GET', 'POST'])
+def VtMachine():
     if 'loggedin' in session and session['loggedin']:
-        datos = Funciones_Request(session,{"Sheet": "MaquinaDeTrabajo","Type": "Get",})
+        datos = Funciones_Request(session,{"Sheet": "VtMachine","Type": "Get",})
         if datos =="Usuario Deshabilitado" or datos =="Usuario Infringió, Los Parámetros Establecidos, Usuario Inhabilitado":
             return render_template('login.html', error=datos)
+        print(datos)
         return render_template("Maquinas_De_Procesamiento.html", datos=datos)
     return render_template('login.html')
+
+
+
 @app.route('/update_machine/<int:machine_id>', methods=['POST'])
 def update_machine(machine_id):
     print("Form Data:", request.form)
@@ -75,9 +80,14 @@ def update_machine(machine_id):
     # return redirect(url_for('index'))
 
 #>Tablas
-@app.route('/Dasboard_Vanti', methods=['GET', 'POST'])
-def Dasboard_Vanti():
-    return render_template("Dasboard_Vanti.html")
+@app.route('/Dasboard', methods=['GET', 'POST'])
+def Dasboard():
+    if 'loggedin' in session and session['loggedin']:
+        datos = Funciones_Request(session,{"Sheet": "Vanti","Type": "Get",})
+        if datos =="Usuario Deshabilitado" or datos =="Usuario Infringió, Los Parámetros Establecidos, Usuario Inhabilitado":
+            return render_template('login.html', error=datos)
+        return render_template("Dasboard_Vanti.html", datos=datos)
+    return render_template('login.html')
 
 
 
